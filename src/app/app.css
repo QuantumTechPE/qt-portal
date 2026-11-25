@@ -26,3 +26,12 @@
   padding: 0 1rem;
   font-family: system-ui, sans-serif;
 }
+
+.footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e5e5;
+  color: #6b7280;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+}

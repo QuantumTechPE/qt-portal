@@ -34,4 +34,13 @@ describe('App', () => {
     expect(el.querySelector('.brand')?.textContent).toContain('qt-demo');
     expect(el.querySelector('[data-testid="env-badge"]')?.textContent).toContain('dev');
   });
+
+  it('muestra el pie con la organización y el ambiente', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const footer = (fixture.nativeElement as HTMLElement).querySelector('[data-testid="footer"]');
+
+    expect(footer?.textContent).toContain('QuantumTech');
+    expect(footer?.textContent).toContain('dev');
+  });
 });
