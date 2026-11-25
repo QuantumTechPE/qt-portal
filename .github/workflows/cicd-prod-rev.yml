@@ -1,0 +1,32 @@
+# CICD PROD REV · "/revertir <motivo>" (solo admins) en el issue de pase:
+# producción vuelve a la versión anterior con el release de reversión, también
+# después de ratificar (Done → Reversión).
+name: CICD PROD REV
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  reversion:
+    name: CICD PROD REV
+    if: >-
+      github.event.issue.pull_request == null &&
+      contains(github.event.issue.labels.*.name, 'pase') &&
+      startsWith(github.event.comment.body, '/revertir')
+    # El turno se toma DENTRO del job (no a nivel workflow): un comentario dispara
+    # CICD PROD, CICD CERT REV y CICD PROD REV, y los que no aplican se saltan sin
+    # ocupar el turno ni cancelar al que sí corre.
+    concurrency:
+      group: pase-${{ github.event.issue.number || github.event.client_payload.issue }}
+      cancel-in-progress: false
+    uses: QuantumTechPE/qt-infra/.github/workflows/service-pase.yml@master
+    permissions:
+      contents: read
+      id-token: write
+      actions: read
+      packages: write
+      attestations: read

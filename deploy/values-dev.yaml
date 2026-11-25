@@ -1,0 +1,19 @@
+# =============================================================================
+# qt-portal · DEV  (se despliega con cada push a la rama de la historia qt/<n>)
+# =============================================================================
+
+# ---- Plan de recursos por pod -------------------------------------------------
+replicaCount: 1
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 200m
+    memory: 64Mi
+
+autoscaling:
+  enabled: false
+
+podDisruptionBudget:
+  enabled: false

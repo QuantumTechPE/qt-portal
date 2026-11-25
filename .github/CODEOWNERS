@@ -1,0 +1,4 @@
+# Code owners: el team `admins` revisa todo cambio que llega a `master`.
+# (Generado por qt-infra/scripts/new-service.sh)
+*            @QuantumTechPE/admins
+/.github/    @QuantumTechPE/admins

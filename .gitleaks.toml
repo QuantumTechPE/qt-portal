@@ -1,0 +1,17 @@
+# Gitleaks: reglas por defecto + excepciones explícitas y justificadas.
+title = "QT gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Valores de ejemplo, credenciales exclusivas de tests y lockfiles"
+paths = [
+  '''(^|/)\.env\.example$''',
+  '''(^|/)package-lock\.json$''',
+  '''^k8s/charts/.+/ci/.+\.yaml$''',
+]
+regexes = [
+  '''test-only-api-key''',
+  '''dev-only-api-key''',
+]

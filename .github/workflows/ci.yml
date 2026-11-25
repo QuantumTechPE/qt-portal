@@ -1,0 +1,31 @@
+# CI de Pull Requests. La lógica vive en qt-infra (plantilla corporativa).
+# PR desde qt/<n>: valida deploy/ (el resto ya corrió en CICD DEV, ver deploy/dev).
+# PR automático: build, tests, SonarQube, Semgrep, Trivy, Gitleaks e imagen.
+# Check requerido por el ruleset: "CI / Gate".
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    uses: QuantumTechPE/qt-infra/.github/workflows/service-ci.yml@master
+    with:
+      stack: angular
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+      id-token: write
+      packages: write
+      attestations: write

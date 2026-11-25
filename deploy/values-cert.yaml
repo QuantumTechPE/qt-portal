@@ -1,0 +1,19 @@
+# =============================================================================
+# qt-portal · CERT  (se despliega con cada release vX.Y.Z)
+# =============================================================================
+
+# ---- Plan de recursos por pod -------------------------------------------------
+replicaCount: 1
+resources:
+  requests:
+    cpu: 20m
+    memory: 32Mi
+  limits:
+    cpu: 300m
+    memory: 96Mi
+
+autoscaling:
+  enabled: false
+
+podDisruptionBudget:
+  enabled: false

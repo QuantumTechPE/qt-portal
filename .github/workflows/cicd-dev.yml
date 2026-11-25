@@ -1,0 +1,34 @@
+# CICD DEV · push a la rama de una historia (qt/<n>) → build, escaneos, imagen
+# firmada → DEV. Sin historia abierta QT-<n> no se despliega.
+# Al terminar marca el commit con el status "deploy/dev": el PR a master solo se
+# puede mergear si su ÚLTIMO commit se desplegó en DEV y quedó Healthy.
+# La lógica vive en qt-infra; los despliegues los ejecuta Argo CD.
+name: CICD DEV
+
+on:
+  push:
+    branches: ["qt/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Un push nuevo a la misma rama reemplaza al despliegue anterior
+concurrency:
+  group: cicd-dev-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  cicd:
+    name: CICD
+    uses: QuantumTechPE/qt-infra/.github/workflows/service-cd.yml@master
+    with:
+      stack: angular
+      channel: dev
+    permissions:
+      contents: write
+      issues: read
+      security-events: write
+      id-token: write
+      packages: write
+      attestations: write

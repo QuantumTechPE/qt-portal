@@ -1,0 +1,33 @@
+# CICD CERT · merge a master = CONGELAMIENTO:
+#   build, escaneos, imagen firmada → release del cambio (vX.Y.Z-rc.N) y release
+#   de reversión → CERT: congela → revierte → recongela → issue de pase.
+# La lógica vive en qt-infra; los despliegues los ejecuta Argo CD.
+name: CICD CERT
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Cada congelamiento corre completo (no se cancela)
+concurrency:
+  group: cicd-cert-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  cicd:
+    name: CICD
+    uses: QuantumTechPE/qt-infra/.github/workflows/service-cd.yml@master
+    with:
+      stack: angular
+      channel: freeze
+    permissions:
+      contents: write
+      issues: read
+      security-events: write
+      id-token: write
+      packages: write
+      attestations: write

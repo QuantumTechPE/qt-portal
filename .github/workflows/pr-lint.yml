@@ -1,0 +1,16 @@
+# Convenciones del PR. Check requerido: "PR Lint / Convenciones".
+name: PR Lint
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  pr-lint:
+    name: PR Lint
+    uses: QuantumTechPE/qt-infra/.github/workflows/service-pr-lint.yml@master

@@ -1,0 +1,27 @@
+# =============================================================================
+# qt-portal · PROD  (mismo release que CERT, con aprobación de admins)
+# =============================================================================
+
+# ---- Plan de recursos por pod -------------------------------------------------
+resources:
+  requests:
+    cpu: 50m
+    memory: 48Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
+
+# ---- Escalado horizontal (HPA) ------------------------------------------------
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 0
+  scaleDownStabilizationSeconds: 300
+
+# ---- Alta disponibilidad ------------------------------------------------------
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+spreadAcrossNodes: true

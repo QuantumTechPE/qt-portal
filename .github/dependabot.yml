@@ -1,0 +1,51 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    # Espera 7 días desde la publicación antes de proponer una versión: da tiempo a
+    # detectar y retirar paquetes comprometidos (ataques a la cadena de suministro).
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "build(deps)"
+    labels: ["dependencies"]
+    groups:
+      angular:
+        patterns: ["@angular/*", "@angular-devkit/*"]
+      testing:
+        patterns: ["vitest", "@vitest/*", "jsdom"]
+    # Angular fija el rango de TypeScript (22.x: >=6.0 <6.1). Se actualiza junto con
+    # Angular (ng update), nunca por separado.
+    ignore:
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    # Espera 7 días desde la publicación antes de proponer una versión: da tiempo a
+    # detectar y retirar paquetes comprometidos (ataques a la cadena de suministro).
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "build(docker)"
+    labels: ["dependencies"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    # Espera 7 días desde la publicación antes de proponer una versión: da tiempo a
+    # detectar y retirar paquetes comprometidos (ataques a la cadena de suministro).
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "ci(deps)"
+    labels: ["dependencies"]

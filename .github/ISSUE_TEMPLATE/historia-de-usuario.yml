@@ -1,0 +1,106 @@
+name: 📘 Historia de usuario
+description: Requerimiento funcional desde la perspectiva del usuario (criterios INVEST).
+title: "[HU] "
+labels: ["type:story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Al crearla entra al tablero en **Backlog**. Cuando cumpla la Definition of Ready, el PO la mueve a **Ready**.
+        En cuanto alguien se **asigna** la historia, el pipeline crea la rama `qt/<n>` (código **QT-<n>**) y la pasa a **In Progress**.
+
+  - type: input
+    id: rol
+    attributes:
+      label: Como
+      description: Rol o tipo de usuario
+      placeholder: "analista de operaciones"
+    validations:
+      required: true
+
+  - type: input
+    id: quiero
+    attributes:
+      label: Quiero
+      description: Capacidad que necesita
+      placeholder: "exportar el reporte diario en CSV"
+    validations:
+      required: true
+
+  - type: textarea
+    id: para
+    attributes:
+      label: Para
+      description: Valor de negocio esperado
+      placeholder: "conciliarlo con el ERP sin reprocesos manuales"
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      description: Escenarios en formato Gherkin
+      value: |
+        Escenario:
+          Dado
+          Cuando
+          Entonces
+      render: gherkin
+    validations:
+      required: true
+
+  - type: dropdown
+    id: componente
+    attributes:
+      label: Componente
+      multiple: true
+      options:
+        - Backend
+        - Frontend
+        - Infraestructura
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - P0 - Crítica
+        - P1 - Alta
+        - P2 - Media
+        - P3 - Baja
+      default: 2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: puntos
+    attributes:
+      label: Story points
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "5"
+        - "8"
+        - "13"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notas
+    attributes:
+      label: Notas técnicas / dependencias
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: dor
+    attributes:
+      label: Definition of Ready
+      options:
+        - label: La historia es independiente, negociable, valiosa, estimable, pequeña y testeable (INVEST)
+        - label: Los criterios de aceptación están acordados con el PO
+        - label: No hay bloqueos externos conocidos

@@ -1,0 +1,4 @@
+# Contexto mínimo: solo el build ya verificado y la config de nginx.
+*
+!dist/app/browser/**
+!nginx/**

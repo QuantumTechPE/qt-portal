@@ -1,0 +1,28 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: system-ui, sans-serif;
+}
+
+.brand {
+  font-weight: 600;
+}
+
+.env {
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.content {
+  max-width: 64rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: system-ui, sans-serif;
+}

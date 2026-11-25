@@ -1,0 +1,62 @@
+name: 🛠️ Tarea técnica
+description: Trabajo técnico sin impacto funcional directo (deuda, infraestructura, refactor).
+title: "[TAREA] "
+labels: ["type:task"]
+body:
+  - type: markdown
+    attributes:
+      value: Al asignarla, el pipeline crea la rama `qt/<n>` (código **QT-<n>**) y la pasa a **In Progress**.
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivacion
+    attributes:
+      label: Motivación
+      description: ¿Qué riesgo o costo reduce?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: componente
+    attributes:
+      label: Componente
+      multiple: true
+      options:
+        - Backend
+        - Frontend
+        - Infraestructura
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - P0 - Crítica
+        - P1 - Alta
+        - P2 - Media
+        - P3 - Baja
+      default: 2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: puntos
+    attributes:
+      label: Story points
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "5"
+        - "8"
+        - "13"
+    validations:
+      required: false
