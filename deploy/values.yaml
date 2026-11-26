@@ -30,6 +30,12 @@ ingress:
 metrics:
   enabled: false
 
+# Observabilidad: un frontend no la necesita. Su salud la vigilan los probes
+# (/healthz) de Kubernetes y Argo CD. Para verlo en Grafana: grafana: true.
+observability:
+  tracing: false   # Nginx no emite trazas OpenTelemetry
+  grafana: false   # sin métricas ni logs en Grafana
+
 # El config.json de qt-config (files:) se monta aquí → la SPA lo lee de /runtime/config.json
 configFiles:
   mountPath: /usr/share/nginx/html/runtime
